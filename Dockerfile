@@ -4,6 +4,23 @@ ROM nikolaik/python-nodejs:python3.12-nodejs22
 
 FROM ruby:latest
 
+
+# List of Programs to be included in the custom-image
+
+# Go
+ENV GOLANG_VERSION 1.21.5
+ENV GO_DOWNLOAD_URL https://go.dev/dl/go${GOLANG_VERSION}.linux-amd64.tar.gz
+
+# Node.js
+ENV NODE_VERSION 20.9.0
+ENV NODE_DOWNLOAD_URL https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz
+
+# Python
+ENV PYTHON_VERSION 3.12.0
+ENV PYTHON_DOWNLOAD_URL https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz
+
+
+
 FROM debian:bookworm-slim
 
 
