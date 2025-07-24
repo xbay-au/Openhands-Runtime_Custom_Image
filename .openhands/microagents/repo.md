@@ -1,0 +1,23 @@
+
+
+
+# OpenHands Custom Docker Image Repository
+
+## Purpose
+This repository sets up a custom Docker image for the OpenHands app, following the [custom sandbox guide](https://docs.all-hands.dev/usage/how-to/custom-sandbox-guide).
+
+## Repository Structure
+```
+Openhands-custom-image/
+│
+├── .git/
+├── Dockerfile
+└── README.md
+```
+
+## General Setup
+To build and run the custom Docker image, follow the instructions in the [README.md](https://github.com/xbay-au/Openhands-custom-image/blob/main/README.md).
+
+## CI Checks
+There are no defined GitHub workflows for CI checks in this repository.
+
