@@ -8,7 +8,14 @@ This repository sets up a custom Docker image for the OpenHands app, following t
 - [Building the Docker Image](#building-the-docker-image)
 - [Running the Docker Container](#running-the-docker-container)
 
+
 ## List of Programs that will be included in the custom-image
+
+- Go
+- Node.js
+- Python
+- Nmap
+- Subfinder
 
 ## Building the Docker Image
 
