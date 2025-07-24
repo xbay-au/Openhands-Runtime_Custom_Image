@@ -2,26 +2,13 @@
 
 # OpenHands Custom Docker Image
 
-This repository sets up a custom Docker image for the OpenHands app, following the [Goby custom sandbox guide](https://docs.all-hands.dev/usage/how-to/custom-sandbox-guide).
+This repository sets up a custom Docker image for the OpenHands app, following the [custom sandbox guide](https://docs.all-hands.dev/usage/how-to/custom-sandbox-guide).
 
 ## Table of Contents
-- [Prerequisites](#prerequisites)
-- [Programs Included](#programs-included)
 - [Building the Docker Image](#building-the-docker-image)
 - [Running the Docker Container](#running-the-docker-container)
 
-## Programs Included
-
-This custom Docker image includes the following programs:
-
-- OpenHands app
-- Docker
-- Python 3.12
-
-## Prerequisites
-
-Before you begin, ensure you have met the following requirements:
-- You have installed [Docker](https://docs.docker.com/get-docker/) on your machine.
+## List of Programs that will be included in the custom-image
 
 ## Building the Docker Image
 
@@ -35,16 +22,16 @@ To build the custom Docker image for OpenHands, follow these steps:
 
 2. Build the Docker image using the provided Dockerfile:
    ```bash
-   docker build -t openhands-custom-image .
+   docker build -t custom-image .
    ```
 
 ## Running the Docker Container
 
-To run a container using the custom OpenHands image, use the following command:
+When running OpenHands using the docker command, replace -e SANDBOX_RUNTIME_CONTAINER_IMAGE=... with -e SANDBOX_BASE_CONTAINER_IMAGE=<custom image name>:
 
-```bash
-docker run -p 51879:51879 -p 55491:55491 openhands-custom-image
 ```
-
-This will start the OpenHands app inside a Docker container and map ports 51879 and 55491 to your host machine.
+docker run -it --rm --pull=always \
+    -e SANDBOX_BASE_CONTAINER_IMAGE=custom-image \
+    ...
+```
 
