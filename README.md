@@ -6,8 +6,17 @@ This repository sets up a custom Docker image for the OpenHands app, following t
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
+- [Programs Included](#programs-included)
 - [Building the Docker Image](#building-the-docker-image)
 - [Running the Docker Container](#running-the-docker-container)
+
+## Programs Included
+
+This custom Docker image includes the following programs:
+
+- OpenHands app
+- Docker
+- Python 3.12
 
 ## Prerequisites
 
