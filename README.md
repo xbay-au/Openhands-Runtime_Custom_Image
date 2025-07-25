@@ -33,7 +33,7 @@ This custom image includes a comprehensive set of tools for various programming 
   - Hydra
   - Nikto
   - Sqlmap
-  - Subfinder (installed via Go)
+  - Subfinder (installed via Go as a security tool)
 
 - **Utilities**:
   - Modern ls command (lsd)
