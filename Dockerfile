@@ -51,9 +51,20 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     nmap \
     hydra \
-    nikto \
-    sqlmap && \
-    rm -rf /var/lib/apt/lists/*
+    wget && \
+    rm -rf /var/lib/apt/lists/* && \
+    # Install Nikto from source as it's not in the default Debian repo
+    wget https://github.com/sullo/nikto/releases/download/v2.5.0/nikto-2.5.0.tar.gz && \
+    tar xzf nikto-2.5.0.tar.gz && \
+    cd nikto-2.5.0 && \
+    cpan install -f Net::SSLeay && \
+    perl nikto.pl -h 127.0.0.1 > /dev/null && \
+    mv nikto.pl /usr/local/bin/nikto && \
+    chmod +x /usr/local/bin/nikto && \
+    cd .. && \
+    rm -rf nikto-2.5.0* && \
+    # Install sqlmap
+    pip3 install sqlmap
 
 # Install Go with retry logic for download failures
 ENV GOLANG_VERSION=1.21.5
