@@ -83,7 +83,6 @@ ENV PATH="$PATH:/root/go/bin"
 RUN nmap --script-updatedb
 
 # Install lsd (modern ls command)
-ENV LSD_VERSION=1.1.5
-RUN curl -sL https://github.com/lsd-rs/lsd/releases/download/v${LSD_VERSION}/lsd_${LSD_VERSION}_linux_x86_64.tar.gz -o /tmp/lsd.tar.gz && \
-    tar xzf /tmp/lsd.tar.gz -C /usr/local/bin --strip-components=1 && \
-    rm /tmp/lsd.tar.gz
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends lsd && \
+    rm -rf /var/lib/apt/lists/*
