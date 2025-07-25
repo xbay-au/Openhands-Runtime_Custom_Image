@@ -72,7 +72,7 @@ RUN set -x && \
 # Set up Go environment
 ENV PATH="/usr/local/go/bin:$PATH"
 
-# Install projectdiscovery subfinder
+# Install projectdiscovery subfinder (security tool)
 RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 
 # Add Go binaries to PATH
