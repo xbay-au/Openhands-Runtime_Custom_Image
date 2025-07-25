@@ -12,7 +12,10 @@ Openhands-custom-image/
 │
 ├── .git/
 ├── Dockerfile
-└── README.md
+├── README.md
+├── subdomain.txt          # List of over 28,000 subdomains for various target websites
+├── subdomain_200.txt      # Randomly selected subset containing exactly 200 subdomains
+└── subfinder_2.8.0_linux_amd64.zip  # Subfinder tool binary
 ```
 
 ## General Setup
