@@ -54,8 +54,8 @@ RUN apt-get update && \
     wget && \
     rm -rf /var/lib/apt/lists/* && \
     # Install Nikto from source as it's not in the default Debian repo
-    wget https://github.com/sullo/nikto/releases/download/v2.5.0/nikto-2.5.0.tar.gz && \
-    tar xzf nikto-2.5.0.tar.gz && \
+    wget https://github.com/sullo/nikto/releases/download/v2.5.0/nikto_2.5.0.tar.gz && \
+    tar xzf nikto_2.5.0.tar.gz && \
     cd nikto-2.5.0 && \
     cpan install -f Net::SSLeay && \
     perl nikto.pl -h 127.0.0.1 > /dev/null && \
