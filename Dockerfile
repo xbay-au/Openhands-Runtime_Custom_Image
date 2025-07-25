@@ -1,67 +1,42 @@
 
-
-ROM nikolaik/python-nodejs:python3.12-nodejs22
-
-FROM ruby:latest
-
-
-# List of Programs to be included in the custom-image
-
-# Go
-ENV GOLANG_VERSION 1.21.5
-ENV GO_DOWNLOAD_URL https://go.dev/dl/go${GOLANG_VERSION}.linux-amd64.tar.gz
-
-# Node.js
-ENV NODE_VERSION 20.9.0
-ENV NODE_DOWNLOAD_URL https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz
-
-# Python
-ENV PYTHON_VERSION 3.12.0
-ENV PYTHON_DOWNLOAD_URL https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz
-
-
-
+# Use a slim Debian base image
 FROM debian:bookworm-slim
 
+LABEL maintainer="Leighton <linux@clucas.au>"
+LABEL description="Custom Docker image for OpenHands with Go, Node.js, Python, Nmap, and Subfinder"
+LABEL version="1.0"
+LABEL usage="docker build -t custom-image ."
 
-LABEL maintainer="Leighton linux@clucas.au"
-
-#DESCRIPTION:           Create Golang in a container
-# AUTHOR:               Leighton <linux@clucas.au>
-# COMMENTS:
-#       Dockerfile builds a golang docker image within a bash shell.
-# USAGE:
-#       Download Dockerfile
-#       wget https://raw.githubusercontent.com/cbay-au/dockerfiles/main/golang/Dockerfile
-#       Build golang image
-#       docker build -t golang .
-#       docker run -it golang:latest bash
-#       test with <go version>
-# TODO:
-#       1.check wich is the lighest FROM to use
-#       2. chech line with ENV seems to be ussing a depreciated syntax
-
-#FROM ubuntu:latest
-FROM debian:bookworm-slim
-
-# Update and install necessary packages
+# Update and install necessary packages in a single layer
 RUN apt-get update && \
-  apt-get install -y --no-install-recommends \
-  bash \
-  curl \
-  wget \
-  git \
-  ca-certificates \
-  --no-install-recommends && \
-  rm -rf /var/lib/apt/lists/*
+    apt-get install -y --no-install-recommends \
+    bash \
+    curl \
+    wget \
+    git \
+    ca-certificates \
+    build-essential \
+    libssl-dev \
+    zlib1g-dev \
+    libbz2-dev \
+    libreadline-dev \
+    libsqlite3-dev \
+    llvm \
+    libncurses5-dev \
+    libncursesw5-dev \
+    xz-utils \
+    tk-dev \
+    libffi-dev \
+    liblzma-dev \
+    python3-pip \
+    nodejs \
+    nmap && \
+    rm -rf /var/lib/apt/lists/*
 
-# Environment variables
-ENV GOLANG_VERSION 1.21.5
+# Install Go
+ENV GOLANG_VERSION=1.21.5
+ENV GO_DOWNLOAD_URL=https://go.dev/dl/go${GOLANG_VERSION}.linux-amd64.tar.gz
 
-# Set the URL for downloading Go
-ENV GO_DOWNLOAD_URL https://go.dev/dl/go${GOLANG_VERSION}.linux-amd64.tar.gz
-
-# Attempt to download Go with retries
 RUN set -x && \
     retry_count=3 && \
     while [ $retry_count -gt 0 ]; do \
@@ -77,18 +52,15 @@ ENV PATH="/usr/local/go/bin:$PATH"
 
 # Install projectdiscovery subfinder
 RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
-RUN echo export PATH=$PATH:$HOME/go/bin >> $home/.bashrc
-RUN . ~/.bashrc
+ENV PATH="$PATH:$HOME/go/bin"
 
-# Set working directory for git clone
+# Update Nmap scripts
+RUN nmap --script-updatedb
+
+# Install lsd (modern ls command)
+RUN curl -s https://api.github.com/repos/lsd-rs/lsd/releases/latest | grep browser_download_url | grep linux-musl | cut -d '"' -f 4 | wget -qi - && \
+    tar xzf lsd*tar.gz --strip-components=1 -C /usr/local/bin && \
+    rm lsd*tar.gz
+
+# Set working directory for git clone operations
 WORKDIR /opt/reconftw
-
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends nmap && \
-    rm -rf /var/lib/apt/lists/*
-
-# Fetch latest NSE scripts from upstream repository
-RUN mkdir -p /usr/share/nmap/nselib/ && \
-    echo "Updating Network Discovery Scripts..." && \
-    nmap --script-updatedb
-
