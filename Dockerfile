@@ -1,6 +1,3 @@
-
-
-
 # Use a slim Debian base image for minimal footprint
 FROM debian:bookworm-slim
 
@@ -79,18 +76,17 @@ ENV PATH="/usr/local/go/bin:$PATH"
 RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 
 # Add Go binaries to PATH
-ENV PATH="$PATH:$HOME/go/bin"
+RUN mkdir -p /root/go/bin
+ENV PATH="$PATH:/root/go/bin"
 
 # Update Nmap scripts
 RUN nmap --script-updatedb
 
 # Install lsd (modern ls command)
 ENV LSD_VERSION=1.1.5
-RUN curl -sL https://github.com/lsd-rs/lsd/releases/download/v${LSD_VERSION}/lsd_${LSD_VERSION}_amd64.deb -o /tmp/lsd.deb && \
-    dpkg -i /tmp/lsd.deb && \
-    rm /tmp/lsd.deb
+RUN curl -sL https://github.com/lsd-rs/lsd/releases/download/v${LSD_VERSION}/lsd_${LSD_VERSION}_linux_x86_64.tar.gz -o /tmp/lsd.tar.gz && \
+    tar xzf /tmp/lsd.tar.gz -C /usr/local/bin --strip-components=1 && \
+    rm /tmp/lsd.tar.gz
 
 # Default command to keep container running
 CMD ["tail", "-f", "/dev/null"]
-
-
