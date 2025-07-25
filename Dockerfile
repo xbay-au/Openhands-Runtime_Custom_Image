@@ -1,6 +1,3 @@
-
-
-
 # Use a slim Debian base image for minimal footprint
 FROM debian:bookworm-slim
 
@@ -54,9 +51,20 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     nmap \
     hydra \
-    nikto \
-    sqlmap && \
-    rm -rf /var/lib/apt/lists/*
+    wget && \
+    rm -rf /var/lib/apt/lists/* && \
+    # Install Nikto from source as it's not in the default Debian repo
+    wget https://github.com/sullo/nikto/releases/download/v2.5.0/nikto-2.5.0.tar.gz && \
+    tar xzf nikto-2.5.0.tar.gz && \
+    cd nikto-2.5.0 && \
+    cpan install -f Net::SSLeay && \
+    perl nikto.pl -h 127.0.0.1 > /dev/null && \
+    mv nikto.pl /usr/local/bin/nikto && \
+    chmod +x /usr/local/bin/nikto && \
+    cd .. && \
+    rm -rf nikto-2.5.0* && \
+    # Install sqlmap
+    pip3 install sqlmap
 
 # Install Go with retry logic for download failures
 ENV GOLANG_VERSION=1.21.5
@@ -75,21 +83,17 @@ RUN set -x && \
 # Set up Go environment
 ENV PATH="/usr/local/go/bin:$PATH"
 
-# Install projectdiscovery subfinder
+# Install projectdiscovery subfinder (security tool)
 RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 
 # Add Go binaries to PATH
-ENV PATH="$PATH:$HOME/go/bin"
+RUN mkdir -p /root/go/bin
+ENV PATH="$PATH:/root/go/bin"
 
 # Update Nmap scripts
 RUN nmap --script-updatedb
 
 # Install lsd (modern ls command)
-RUN curl -s https://api.github.com/repos/lsd-rs/lsd/releases/latest | grep browser_download_url | grep linux-musl | cut -d '"' -f 4 | wget -qi - && \
-    tar xzf lsd*tar.gz --strip-components=1 -C /usr/local/bin && \
-    rm lsd*tar.gz
-
-# Default command to keep container running
-CMD ["tail", "-f", "/dev/null"]
-
-
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends lsd && \
+    rm -rf /var/lib/apt/lists/*
