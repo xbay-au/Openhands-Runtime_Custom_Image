@@ -1,15 +1,20 @@
 
 
 
-# Use a slim Debian base image
+# Use a slim Debian base image for minimal footprint
 FROM debian:bookworm-slim
 
+# Metadata labels for the Docker image
 LABEL maintainer="Leighton <linux@clucas.au>"
 LABEL description="Custom Docker image for OpenHands with Go, Node.js, Python, Nmap, Subfinder, Ruby, PHP, Java, and more"
-LABEL version="1.2"
+LABEL version="1.3"
 LABEL usage="docker build -t custom-image ."
+LABEL url="https://github.com/xbay-au/Openhands-custom-image"
 
-# Update and install necessary packages in a single layer
+# Set environment variables for non-interactive installs
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Update package list and install essential tools in separate layers for better caching
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     bash \
@@ -29,35 +34,40 @@ RUN apt-get update && \
     xz-utils \
     tk-dev \
     libffi-dev \
-    liblzma-dev \
+    liblzma-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install programming languages and related tools
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
     python3-pip \
     nodejs \
     npm \
     ruby \
     php \
     openjdk-17-jdk \
-    nano \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release \
+    nano && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install security tools
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
     nmap \
     hydra \
     nikto \
     sqlmap && \
     rm -rf /var/lib/apt/lists/*
 
-# Install Go
+# Install Go with retry logic for download failures
 ENV GOLANG_VERSION=1.21.5
 ENV GO_DOWNLOAD_URL=https://go.dev/dl/go${GOLANG_VERSION}.linux-amd64.tar.gz
 
 RUN set -x && \
     retry_count=3 && \
     while [ $retry_count -gt 0 ]; do \
-        wget -q --no-check-certificate "$GO_DOWNLOAD_URL" && \
-        tar -C /usr/local -xzf go${GOLANG_VERSION}.linux-amd64.tar.gz && \
-        rm go${GOLANG_VERSION}.linux-amd64.tar.gz && \
+        wget -q --no-check-certificate "$GO_DOWNLOAD_URL" -O /tmp/go.tar.gz && \
+        tar -C /usr/local -xzf /tmp/go.tar.gz && \
+        rm /tmp/go.tar.gz && \
         break || echo "Download failed. Retrying..." && retry_count=$((retry_count - 1)) && sleep 5; \
     done && \
     [ $retry_count -gt 0 ] || exit 1
@@ -67,6 +77,8 @@ ENV PATH="/usr/local/go/bin:$PATH"
 
 # Install projectdiscovery subfinder
 RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+
+# Add Go binaries to PATH
 ENV PATH="$PATH:$HOME/go/bin"
 
 # Update Nmap scripts
@@ -76,11 +88,6 @@ RUN nmap --script-updatedb
 RUN curl -s https://api.github.com/repos/lsd-rs/lsd/releases/latest | grep browser_download_url | grep linux-musl | cut -d '"' -f 4 | wget -qi - && \
     tar xzf lsd*tar.gz --strip-components=1 -C /usr/local/bin && \
     rm lsd*tar.gz
-
-# Add a user to run commands without sudo
-RUN groupadd -g 999 docker && \
-    useradd -r -u 999 -g docker docker && \
-    usermod -aG sudo,docker $(whoami)
 
 # Default command to keep container running
 CMD ["tail", "-f", "/dev/null"]
