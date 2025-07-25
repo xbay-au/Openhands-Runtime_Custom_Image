@@ -1,10 +1,12 @@
 
+
+
 # Use a slim Debian base image
 FROM debian:bookworm-slim
 
 LABEL maintainer="Leighton <linux@clucas.au>"
-LABEL description="Custom Docker image for OpenHands with Go, Node.js, Python, Nmap, and Subfinder"
-LABEL version="1.0"
+LABEL description="Custom Docker image for OpenHands with Go, Node.js, Python, Nmap, Subfinder, Ruby, PHP, Java, and more"
+LABEL version="1.2"
 LABEL usage="docker build -t custom-image ."
 
 # Update and install necessary packages in a single layer
@@ -30,7 +32,20 @@ RUN apt-get update && \
     liblzma-dev \
     python3-pip \
     nodejs \
-    nmap && \
+    npm \
+    ruby \
+    php \
+    openjdk-17-jdk \
+    nano \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release \
+    nmap \
+    hydra \
+    nikto \
+    sqlmap && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Go
@@ -62,5 +77,12 @@ RUN curl -s https://api.github.com/repos/lsd-rs/lsd/releases/latest | grep brows
     tar xzf lsd*tar.gz --strip-components=1 -C /usr/local/bin && \
     rm lsd*tar.gz
 
-# Set working directory for git clone operations
-WORKDIR /opt/reconftw
+# Add a user to run commands without sudo
+RUN groupadd -g 999 docker && \
+    useradd -r -u 999 -g docker docker && \
+    usermod -aG sudo,docker $(whoami)
+
+# Default command to keep container running
+CMD ["tail", "-f", "/dev/null"]
+
+
