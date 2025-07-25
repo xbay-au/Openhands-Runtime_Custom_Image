@@ -85,9 +85,10 @@ ENV PATH="$PATH:$HOME/go/bin"
 RUN nmap --script-updatedb
 
 # Install lsd (modern ls command)
-RUN curl -s https://api.github.com/repos/lsd-rs/lsd/releases/latest | grep browser_download_url | grep linux-musl | cut -d '"' -f 4 | wget -qi - && \
-    tar xzf lsd*tar.gz --strip-components=1 -C /usr/local/bin && \
-    rm lsd*tar.gz
+ENV LSD_VERSION=1.1.5
+RUN curl -sL https://github.com/lsd-rs/lsd/releases/download/v${LSD_VERSION}/lsd_${LSD_VERSION}_amd64.deb -o /tmp/lsd.deb && \
+    dpkg -i /tmp/lsd.deb && \
+    rm /tmp/lsd.deb
 
 # Default command to keep container running
 CMD ["tail", "-f", "/dev/null"]
