@@ -31,6 +31,7 @@ RUN apt-get update && \
     libncurses5-dev \
     libncursesw5-dev \
     xz-utils \
+    apt-utils
     tk-dev \
     libffi-dev \
     liblzma-dev && \
