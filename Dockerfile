@@ -85,7 +85,7 @@ RUN mkdir -p /usr/share/nmap/nselib/ && \
 
 # Install nikto security scanner
 RUN apt-get update && \
-  apt-get install -y --no-install-recommends nikto perl && \
+  apt add --no-cache nikto perl-net-ssleay && \
   rm -rf /var/lib/apt/lists/*
 
 # Install projectdiscovery subfinder (security tool)
