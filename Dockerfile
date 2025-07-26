@@ -92,6 +92,6 @@ RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 # 2. Review and optimize package installations for better caching
 # 3. Consider adding additional programming languages if required by projects
 # Install nikto security scanner
-RUN apt-get update && \
-  apt add --no-cache nikto perl-net-ssleay && \
-  rm -rf /var/lib/apt/lists/*
+# RUN apt-get update && \
+#   apt add --no-cache nikto perl-net-ssleay && \
+#   rm -rf /var/lib/apt/lists/*
