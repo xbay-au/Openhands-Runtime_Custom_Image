@@ -30,9 +30,15 @@ This custom image includes a comprehensive set of tools for various programming 
 
 - **Security Tools**:
   - Nmap (with updated scripts)
-  - Hydra
-  - Nikto
-  - Sqlmap
+  - Hakluke's tools:
+    - hakrawler
+    - hakrevdns
+    - haklistgen
+    - hakoriginfinder
+    - hakcheckurl
+    - haktrails
+    - haktldextract
+    - hakip2host
   - Subfinder (installed via Go as a security tool)
 
 - **Utilities**:
@@ -82,6 +88,9 @@ The Dockerfile has been optimized with the following improvements:
 3. **Code Cleanup**:
    - Removed duplicate package installations
    - Improved formatting and comments for better readability
+4. **Security Tools Enhancement**:
+   - Added Hakluke's security tools collection
+   - Organized security tool installation sections with TODO items
 
 ## Important Note
 
