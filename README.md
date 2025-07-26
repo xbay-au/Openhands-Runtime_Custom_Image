@@ -83,6 +83,10 @@ The Dockerfile has been optimized with the following improvements:
    - Removed duplicate package installations
    - Improved formatting and comments for better readability
 
+## Important Note
+
+**ALL pushes to the remote repository must be made to the `main` branch.**
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a pull request or open an issue.
