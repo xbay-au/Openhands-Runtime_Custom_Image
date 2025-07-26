@@ -98,3 +98,8 @@ RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 
 
 
+
+# TODO:
+# 1. Add more security tools as needed
+# 2. Review and optimize package installations for better caching
+# 3. Consider adding additional programming languages if required by projects
