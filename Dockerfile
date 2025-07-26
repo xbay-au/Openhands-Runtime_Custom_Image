@@ -76,13 +76,5 @@ RUN nmap --script-updatedb
 RUN apt-get update && \
     apt-get install -y --no-install-recommends lsd && \
     rm -rf /var/lib/apt/lists/*
-
-# TODO: Re-add security tools installation
-# The following tools were removed due to build issues:
-# - nmap, hydra, wget (apt packages)
-# - Nikto (from GitHub source)
-# - sqlmap (pip package)
-
-
 # Install projectdiscovery subfinder (security tool)
 RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
