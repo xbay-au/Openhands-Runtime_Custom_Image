@@ -1,6 +1,6 @@
 
 
-# OpenHands Custom Docker Image
+# Openhands-Runtime_Custom_Image
 
 This repository sets up a custom Docker image for the OpenHands app, following the [custom sandbox guide](https://docs.all-hands.dev/usage/how-to/custom-sandbox-guide).
 

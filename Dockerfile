@@ -6,7 +6,7 @@ LABEL maintainer="Leighton <linux@clucas.au>"
 LABEL description="Custom Docker image for OpenHands with Go, Node.js, Python, Nmap, Subfinder, Ruby, PHP, Java, and more"
 LABEL version="1.3"
 LABEL usage="docker build -t custom-image ."
-LABEL url="https://github.com/xbay-au/Openhands-custom-image"
+LABEL url="https://github.com/xbay-au/Openhands-Runtime_Custom_Image"
 
 # Set environment variables for non-interactive installs
 ENV DEBIAN_FRONTEND=noninteractive
