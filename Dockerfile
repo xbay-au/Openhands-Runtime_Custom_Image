@@ -76,6 +76,7 @@ RUN nmap --script-updatedb
 RUN apt-get update && \
     apt-get install -y --no-install-recommends lsd && \
     rm -rf /var/lib/apt/lists/*
+# Install Security Tools
 # Install projectdiscovery subfinder (security tool)
 RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 
