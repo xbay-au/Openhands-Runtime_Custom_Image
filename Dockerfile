@@ -84,9 +84,9 @@ RUN mkdir -p /usr/share/nmap/nselib/ && \
     nmap --script-updatedb
 
 # Install nikto security scanner
-RUN apk update && \
-  apk add --no-cache nikto perl-net-ssleay && \
-  rm -f /tmp/* /etc/apk/cache/*
+RUN apt-get update && \
+  apt-get install -y --no-install-recommends nikto perl && \
+  rm -rf /var/lib/apt/lists/*
 
 # Install projectdiscovery subfinder (security tool)
 RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
