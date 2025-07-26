@@ -32,7 +32,7 @@ RUN apt-get update && \
     tk-dev \
     libffi-dev \
     liblzma-dev && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/
 
 # Install programming languages and related tools
 RUN apt-get update && \
@@ -44,7 +44,7 @@ RUN apt-get update && \
     php \
     openjdk-17-jdk \
     nano && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/
 
 # Install security tools section has been removed temporarily
 
@@ -77,7 +77,7 @@ RUN apt-get update && \
 # Install Security Tools
 RUN apt-get update && \
     apt-get install -y --no-install-recommends nmap && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/
 
 # Fetch latest NSE scripts from upstream repository
 RUN mkdir -p /usr/share/nmap/nselib/ && \
@@ -86,11 +86,22 @@ RUN mkdir -p /usr/share/nmap/nselib/ && \
 # Install projectdiscovery subfinder (security tool)
 RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 
+# Install Hakluke Repo's
+RUN go install github.com/hakluke/hakrawler@latest
+RUN go install github.com/hakluke/hakrevdns@latest
+RUN go install github.com/hakluke/haklistgen@latest
+RUN go install github.com/hakluke/hakoriginfinder@latest
+RUN go install github.com/hakluke/hakcheckurl@latest
+RUN go install -v github.com/hakluke/haktrails@latest
+RUN go install github.com/hakluke/haktldextract@latest
+RUN go install github.com/hakluke/hakip2host@latest
+#RUN go install github.com/hakluke/hakfindinternaldomains
 
 # TODO:
 # 1. Add more security tools as needed
 # 2. Review and optimize package installations for better caching
 # 3. Consider adding additional programming languages if required by projects
+
 # Install nikto security scanner
 # RUN apt-get update && \
 #   apt add --no-cache nikto perl-net-ssleay && \
