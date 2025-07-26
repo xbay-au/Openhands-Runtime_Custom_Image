@@ -83,23 +83,13 @@ RUN apt-get update && \
 RUN mkdir -p /usr/share/nmap/nselib/ && \
     nmap --script-updatedb
 
-# Install nikto security scanner
-RUN apt-get update && \
-  apt add --no-cache nikto perl-net-ssleay && \
-  rm -rf /var/lib/apt/lists/*
-
 # Install projectdiscovery subfinder (security tool)
 RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
-
-
-
-
-
-
-
-
-
 # TODO:
 # 1. Add more security tools as needed
 # 2. Review and optimize package installations for better caching
 # 3. Consider adding additional programming languages if required by projects
+# Install nikto security scanner
+RUN apt-get update && \
+  apt add --no-cache nikto perl-net-ssleay && \
+  rm -rf /var/lib/apt/lists/*
