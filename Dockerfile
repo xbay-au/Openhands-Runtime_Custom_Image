@@ -85,6 +85,8 @@ RUN mkdir -p /usr/share/nmap/nselib/ && \
 
 # Install projectdiscovery subfinder (security tool)
 RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+
+
 # TODO:
 # 1. Add more security tools as needed
 # 2. Review and optimize package installations for better caching
