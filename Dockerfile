@@ -46,24 +46,7 @@ RUN apt-get update && \
     nano && \
     rm -rf /var/lib/apt/lists/*
 
-# Install security tools
-# RUN apt-get update && \
-#     apt-get install -y --no-install-recommends \
-#     nmap \
-#     hydra \
-#     wget && \
-#     rm -rf /var/lib/apt/lists/* && \
-#     # Install Nikto from GitHub repository as it's not in the default Debian repo
-#     git clone https://github.com/sullo/nikto.git /tmp/nikto && \
-#     cd /tmp/nikto && \
-#     cpan install -f Net::SSLeay && \
-#     perl nikto.pl -h 127.0.0.1 > /dev/null && \
-#     mv nikto.pl /usr/local/bin/nikto && \
-#     chmod +x /usr/local/bin/nikto && \
-#     cd .. && \
-#     rm -rf /tmp/nikto && \
-#     # Install sqlmap
-#     pip3 install sqlmap
+# Install security tools section has been removed temporarily
 
 # Install Go with retry logic for download failures
 ENV GOLANG_VERSION=1.21.5
