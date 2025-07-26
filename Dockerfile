@@ -78,6 +78,9 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists*
 
 # Install Security Tools
+RUN gem install wpscan
+
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends nmap && \
     rm -rf /var/lib/apt/lists/
