@@ -81,7 +81,6 @@ RUN apt-get update && \
 
 # Fetch latest NSE scripts from upstream repository
 RUN mkdir -p /usr/share/nmap/nselib/ && \
-    echo "Updating Network Discovery Scripts..." && \
     nmap --script-updatedb
 
 # Install projectdiscovery subfinder (security tool)
