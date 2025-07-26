@@ -30,6 +30,13 @@ RUN apt-get update && \
     llvm \
     libncurses5-dev \
     libncursesw5-dev \
+    libcurl4-openssl-dev \
+    libxml2 \
+    libxml2-dev \ 
+    libxslt1-dev \
+    ruby-dev \
+    libgmp-dev \
+     zlib1g-dev \
     xz-utils \
     apt-utils \
     tk-dev \
