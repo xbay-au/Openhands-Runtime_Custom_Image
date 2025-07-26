@@ -1,5 +1,7 @@
 # Use a slim Debian base image for minimal footprint
-FROM debian:bookworm-slim
+# FROM debian:bookworm-slim
+# FROM debian:bookworm-slim
+FROM nikolaik/python-nodejs:python3.12-nodejs22
 
 # Metadata labels for the Docker image
 LABEL maintainer="Leighton <linux@clucas.au>"
