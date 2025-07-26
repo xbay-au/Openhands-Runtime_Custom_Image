@@ -75,8 +75,18 @@ RUN nmap --script-updatedb
 # Install lsd (modern ls command)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends lsd && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists*
+
 # Install Security Tools
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends nmap && \
+    rm -rf /var/lib/apt/lists/*
+
+# Fetch latest NSE scripts from upstream repository
+RUN mkdir -p /usr/share/nmap/nselib/ && \
+    echo "Updating Network Discovery Scripts..." && \
+    nmap --script-updatedb
+
 # Install projectdiscovery subfinder (security tool)
 RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 
