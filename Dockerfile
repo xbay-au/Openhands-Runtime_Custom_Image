@@ -69,9 +69,6 @@ ENV PATH="/usr/local/go/bin:$PATH"
 RUN mkdir -p /root/go/bin
 ENV PATH="$PATH:/root/go/bin"
 
-# Update Nmap scripts
-RUN nmap --script-updatedb
-
 # Install lsd (modern ls command)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends lsd && \
