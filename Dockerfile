@@ -36,7 +36,7 @@ RUN apt-get update && \
     libxslt1-dev \
     ruby-dev \
     libgmp-dev \
-     zlib1g-dev \
+    zlib1g-dev \
     xz-utils \
     apt-utils \
     tk-dev \
@@ -98,6 +98,9 @@ RUN mkdir -p /usr/share/nmap/nselib/ && \
 
 # Install projectdiscovery subfinder (security tool)
 RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+RUN go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
+
+RUN go install -v github.com/haccer/subjack
 
 # Install Hakluke Repo's
 RUN go install github.com/hakluke/hakrawler@latest
