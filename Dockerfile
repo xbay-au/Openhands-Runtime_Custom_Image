@@ -100,7 +100,7 @@ RUN mkdir -p /usr/share/nmap/nselib/ && \
 RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 RUN go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
 
-RUN go install github.com/haccer/subjack
+RUN go install github.com/haccer/subjack@latest
 
 # Install Hakluke Repo's
 RUN go install github.com/hakluke/hakrawler@latest
