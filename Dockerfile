@@ -42,6 +42,7 @@ RUN apt-get update && \
     tk-dev \
     libffi-dev \
     iputils-ping \
+    dirb \
     liblzma-dev && \
     rm -rf /var/lib/apt/lists/
 
