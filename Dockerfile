@@ -101,6 +101,11 @@ RUN mkdir -p /usr/share/nmap/nselib/ && \
 RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 RUN go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
 
+# Install Nikto
+RUN apt update && \
+    apt add --no-cache nikto perl-net-ssleay && \
+    rm -f /tmp/* /etc/apt/cache/*
+
 
 # Install Hakluke Repo's
 RUN go install github.com/hakluke/hakrawler@latest
