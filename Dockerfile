@@ -103,9 +103,12 @@ RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 RUN go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
 
 # Install Nikto
-RUN apt update && \
-    apt add --no-cache nikto perl-net-ssleay && \
-    rm -f /tmp/* /etc/apt/cache/*
+RUN apk add --update --no-cache --virtual .build-deps \
+     perl \
+     perl-net-ssleay
+
+ENV  PATH=${PATH}:/opt/nikto
+
 
 
 # Install Hakluke Repo's
