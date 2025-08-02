@@ -14,36 +14,72 @@ This repository sets up a custom Docker image for the OpenHands app, following t
 
 This custom image includes a comprehensive set of tools for various programming languages and security testing:
 
-- **Programming Languages**:
-  - Go
-  - Node.js
-  - Python (with pip)
-  - Ruby
-  - PHP
-  - Java (OpenJDK 17)
+Here is a formatted list of the tools installed by the provided Dockerfile:
 
-- **Development Tools**:
-  - Git
-  - Build-essential (gcc, make, etc.)
-  - Curl, Wget
-  - Nano text editor
+Here is the formatted list of tools installed by the provided Dockerfile in Markdown format:
 
-- **Security Tools**:
-  - Nmap (with updated scripts)
-  - Hakluke's tools:
-    - hakrawler
-    - hakrevdns
-    - haklistgen
-    - hakoriginfinder
-    - hakcheckurl
-    - haktrails
-    - haktldextract
-    - hakip2host
-  - Subfinder (installed via Go as a security tool)
+### Essential Tools:
+- bash
+- curl
+- wget
+- git
+- ca-certificates
+- build-essential
+- libssl-dev
+- zlib1g-dev
+- libbz2-dev
+- libreadline-dev
+- libsqlite3-dev
+- llvm
+- libncurses5-dev
+- libncursesw5-dev
+- libcurl4-openssl-dev
+- libxml2
+- libxml2-dev
+- libxslt1-dev
+- ruby-dev
+- libgmp-dev
+- xz-utils
+- apt-utils
+- tk-dev
+- libffi-dev
+- iputils-ping
+- dirb
+- liblzma-dev
 
-- **Utilities**:
-  - Modern ls command (lsd)
-  - Various development libraries for building software
+### Programming Languages and Related Tools:
+- python3-pip
+- nodejs
+- npm
+- ruby
+- php
+- openjdk-17-jdk
+- nano
+
+### Go Language and Tools:
+- go (version 1.21.5)
+- lsd (modern ls command)
+
+### Security Tools:
+- wpscan (WordPress security scanner)
+- nmap (Network Mapper)
+- subfinder (projectdiscovery subdomain discovery tool)
+- httpx (projectdiscovery HTTP toolkit)
+- hakrawler (Hakluke's web crawler)
+- hakrevdns (Hakluke's reverse DNS tool)
+- haklistgen (Hakluke's list generator)
+- hakoriginfinder (Hakluke's origin finder)
+- hakcheckurl (Hakluke's URL checker)
+- haktrails (Hakluke's trail finder)
+- haktldextract (Hakluke's TLD extractor)
+- hakip2host (Hakluke's IP to host resolver)
+- nikto (web server scanner)
+
+### Additional Tools:
+- perl
+- libnet-ssleay-perl
+
+This list covers all the tools and dependencies installed by the Dockerfile, categorized for better understanding.
 
 ## Building the Docker Image
 
@@ -70,31 +106,6 @@ docker run -it --rm --pull=always \
     ...
 ```
 
-## Subdomain Files
-
-This repository also includes subdomain files generated using the `subfinder` tool:
-
-- `subdomains.txt`: A comprehensive list of subdomains for various target websites (over 28,000 entries)
-- `subdomain_200.txt`: A randomly selected subset containing exactly 200 subdomains
-
-These files can be used as input for your applications that require subdomain information.
-
-## Dockerfile Improvements
-
-The Dockerfile has been optimized with the following improvements:
-
-1. **Layer Optimization**: Package installations are split into separate layers to improve caching.
-2. **Metadata**: Added additional labels for better image management (URL)
-3. **Code Cleanup**:
-   - Removed duplicate package installations
-   - Improved formatting and comments for better readability
-4. **Security Tools Enhancement**:
-   - Added Hakluke's security tools collection
-   - Organized security tool installation sections with TODO items
-
-## Important Note
-
-**ALL pushes to the remote repository must be made to the `main` branch.**
 
 ## Contributing
 
