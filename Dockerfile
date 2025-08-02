@@ -1,7 +1,4 @@
-# Use a slim Debian base image for minimal footprint
-# FROM debian:bookworm-slim
-# FROM debian:bookworm-slim
-FROM nikolaik/python-nodejs:python3.12-nodejs22
+ROM nikolaik/python-nodejs:python3.12-nodejs22
 
 # Metadata labels for the Docker image
 LABEL maintainer="Leighton <linux@clucas.au>"
@@ -32,7 +29,7 @@ RUN apt-get update && \
     libncursesw5-dev \
     libcurl4-openssl-dev \
     libxml2 \
-    libxml2-dev \ 
+    libxml2-dev \
     libxslt1-dev \
     ruby-dev \
     libgmp-dev \
@@ -57,8 +54,6 @@ RUN apt-get update && \
     openjdk-17-jdk \
     nano && \
     rm -rf /var/lib/apt/lists/
-
-# Install security tools section has been removed temporarily
 
 # Install Go with retry logic for download failures
 ENV GOLANG_VERSION=1.21.5
@@ -87,47 +82,30 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists*
 
 # Install Security Tools
-RUN gem install wpscan
-
-
-RUN apt-get update && \
+RUN gem install wpscan && \
+    apt-get update && \
     apt-get install -y --no-install-recommends nmap && \
-    rm -rf /var/lib/apt/lists/
-
-# Fetch latest NSE scripts from upstream repository
-RUN mkdir -p /usr/share/nmap/nselib/ && \
+    rm -rf /var/lib/apt/lists* && \
+    mkdir -p /usr/share/nmap/nselib/ && \
     nmap --script-updatedb
 
 # Install projectdiscovery subfinder (security tool)
-RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
-RUN go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
-
-# Install Nikto
-RUN apk add --update --no-cache --virtual .build-deps \
-     perl \
-     perl-net-ssleay
-
-ENV  PATH=${PATH}:/opt/nikto
-
-
+RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest && \
+    go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
 
 # Install Hakluke Repo's
-RUN go install github.com/hakluke/hakrawler@latest
-RUN go install github.com/hakluke/hakrevdns@latest
-RUN go install github.com/hakluke/haklistgen@latest
-RUN go install github.com/hakluke/hakoriginfinder@latest
-RUN go install github.com/hakluke/hakcheckurl@latest
-RUN go install -v github.com/hakluke/haktrails@latest
-RUN go install github.com/hakluke/haktldextract@latest
-RUN go install github.com/hakluke/hakip2host@latest
-#RUN go install github.com/hakluke/hakfindinternaldomains
+RUN go install github.com/hakluke/hakrawler@latest && \
+    go install github.com/hakluke/hakrevdns@latest && \
+    go install github.com/hakluke/haklistgen@latest && \
+    go install github.com/hakluke/hakoriginfinder@latest && \
+    go install github.com/hakluke/hakcheckurl@latest && \
+    go install -v github.com/hakluke/haktrails@latest && \
+    go install github.com/hakluke/haktldextract@latest && \
+    go install github.com/hakluke/hakip2host@latest
 
-# TODO:
-# 1. Add more security tools as needed
-# 2. Review and optimize package installations for better caching
-# 3. Consider adding additional programming languages if required by projects
+# Install Nikto security scanner
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends perl libnet-ssleay-perl && \
+    rm -rf /var/lib/apt/lists*
 
-# Install nikto security scanner
-# RUN apt-get update && \
-#   apt add --no-cache nikto perl-net-ssleay && \
-#   rm -rf /var/lib/apt/lists/*
+ENV PATH=${PATH}:/opt/nikto
