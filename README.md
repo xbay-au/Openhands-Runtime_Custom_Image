@@ -18,68 +18,71 @@ Here is a formatted list of the tools installed by the provided Dockerfile:
 
 Here is the formatted list of tools installed by the provided Dockerfile in Markdown format:
 
-### Essential Tools:
-- bash
-- curl
-- wget
-- git
-- ca-certificates
-- build-essential
-- libssl-dev
-- zlib1g-dev
-- libbz2-dev
-- libreadline-dev
-- libsqlite3-dev
-- llvm
-- libncurses5-dev
-- libncursesw5-dev
-- libcurl4-openssl-dev
-- libxml2
-- libxml2-dev
-- libxslt1-dev
-- ruby-dev
-- libgmp-dev
-- xz-utils
-- apt-utils
-- tk-dev
-- libffi-dev
-- iputils-ping
-- dirb
-- liblzma-dev
+# Tools and Languages Installed
 
-### Programming Languages and Related Tools:
-- python3-pip
-- nodejs
-- npm
-- ruby
-- php
-- openjdk-17-jdk
-- nano
+## Programming Languages and Runtimes
 
-### Go Language and Tools:
-- go (version 1.21.5)
-- lsd (modern ls command)
+- **Python 3.12**
+- **Node.js 22**
+  - Includes `npm` (Node Package Manager)
+- **Ruby**
+- **PHP**
+- **OpenJDK 17**
+- **Go 1.21.5**
 
-### Security Tools:
-- wpscan (WordPress security scanner)
-- nmap (Network Mapper)
-- subfinder (projectdiscovery subdomain discovery tool)
-- httpx (projectdiscovery HTTP toolkit)
-- hakrawler (Hakluke's web crawler)
-- hakrevdns (Hakluke's reverse DNS tool)
-- haklistgen (Hakluke's list generator)
-- hakoriginfinder (Hakluke's origin finder)
-- hakcheckurl (Hakluke's URL checker)
-- haktrails (Hakluke's trail finder)
-- haktldextract (Hakluke's TLD extractor)
-- hakip2host (Hakluke's IP to host resolver)
-- nikto (web server scanner)
+## Essential Tools and Libraries
 
-### Additional Tools:
-- perl
-- libnet-ssleay-perl
+- **Bash**
+- **Curl**
+- **Wget**
+- **Git**
+- **CA Certificates**
+- **Build-essential** (GCC, G++, Make)
+- **Libssl-dev**
+- **Zlib1g-dev**
+- **Libbz2-dev**
+- **Libreadline-dev**
+- **Libsqlite3-dev**
+- **LLVM**
+- **Libncurses5-dev**
+- **Libncursesw5-dev**
+- **Libcurl4-openssl-dev**
+- **Libxml2** and **Libxml2-dev**
+- **Libxslt1-dev**
+- **Ruby-dev**
+- **Libgmp-dev**
+- **Xz-utils**
+- **Apt-utils**
+- **Tk-dev**
+- **Libffi-dev**
+- **Iputils-ping**
+- **Dirb**
+- **Lsd** (modern `ls` command)
+- **Nano** (text editor)
 
-This list covers all the tools and dependencies installed by the Dockerfile, categorized for better understanding.
+## Security Tools
+
+- **Wpscan** (WordPress security scanner)
+- **Nmap** (Network mapper)
+- **Nikto** (Web server scanner)
+- **Subfinder** (Subdomain discovery tool by ProjectDiscovery)
+- **Httpx** (Fast and multi-purpose HTTP tool by ProjectDiscovery)
+- **Hakrawler** (Web crawler by Hakluke)
+- **Hakrevdns** (Reverse DNS lookup tool by Hakluke)
+- **Haklistgen** (Subdomain list generator by Hakluke)
+- **Hakoriginfinder** (Origin finding tool by Hakluke)
+- **Hakcheckurl** (URL checker by Hakluke)
+- **Haktrails** (Trail finding tool by Hakluke)
+- **Haktldextract** (TLD extraction tool by Hakluke)
+- **Hakip2host** (IP to host converter by Hakluke)
+- **Ffuf** (Fast web fuzzer)
+- **Assetfinder** (Subdomain and asset discovery tool by Tom Nomnom)
+- **Waybackurls** (Extract URLs from the Wayback Machine by Tom Nomnom)
+
+## Containerization Tools
+
+- **Docker CE** (Community Edition)
+  - Includes `docker-ce-cli` and `containerd.io`
 
 ## Building the Docker Image
 
@@ -87,8 +90,8 @@ To build the custom Docker image for OpenHands, follow these steps:
 
 1. Clone this repository to your local machine:
    ```bash
-   git clone https://github.com/xbay-au/Openhands-custom-image.git
-   cd Openhands-custom-image
+   git clone https://github.com/xbay-au/Openhands-Runtime_Custom_Image.git
+   cd Openhands-Runtime_Custom_Image
    ```
 
 2. Build the Docker image using the provided Dockerfile:
