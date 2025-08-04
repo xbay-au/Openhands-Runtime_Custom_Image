@@ -127,3 +127,9 @@ RUN apt-get update && \
 
 # Install ffuf
 RUN go install github.com/ffuf/ffuf/v2@latest
+
+# Install assetfinder
+RUN go install github.com/tomnomnom/assetfinder@latest
+
+# Install waybackurls
+RUN go install github.com/tomnomnom/waybackurls@latest
