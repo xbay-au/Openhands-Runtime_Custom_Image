@@ -31,7 +31,7 @@ Here is the formatted list of tools installed by the provided Dockerfile in Mark
 - **Go 1.21.5**
 
 ## Essential Tools and Libraries
-### found in /usr/bin
+
 
 - **Bash**
 - **Curl**
@@ -63,7 +63,10 @@ Here is the formatted list of tools installed by the provided Dockerfile in Mark
 
 ## Security Tools
 ### found in /usr/bin
-
+- **Ping**
+- 
+## found in /usr/local/bin/
+- - **Wpscan** (WordPress security scanner)
 
 ### found in /root/go/bin
 - **Subfinder** (Subdomain discovery tool by ProjectDiscovery)
@@ -83,7 +86,7 @@ Here is the formatted list of tools installed by the provided Dockerfile in Mark
 
 
 
-- **Wpscan** (WordPress security scanner)
+
 - **Nmap** (Network mapper)
 - **Nikto** (Web server scanner)
 
