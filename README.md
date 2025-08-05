@@ -31,6 +31,7 @@ Here is the formatted list of tools installed by the provided Dockerfile in Mark
 - **Go 1.21.5**
 
 ## Essential Tools and Libraries
+### found in /usr/bin
 
 - **Bash**
 - **Curl**
@@ -61,10 +62,10 @@ Here is the formatted list of tools installed by the provided Dockerfile in Mark
 - **Nano** (text editor)
 
 ## Security Tools
+### found in /usr/bin
 
-- **Wpscan** (WordPress security scanner)
-- **Nmap** (Network mapper)
-- **Nikto** (Web server scanner)
+
+### found in /root/go/bin
 - **Subfinder** (Subdomain discovery tool by ProjectDiscovery)
 - **Httpx** (Fast and multi-purpose HTTP tool by ProjectDiscovery)
 - **Hakrawler** (Web crawler by Hakluke)
@@ -78,6 +79,15 @@ Here is the formatted list of tools installed by the provided Dockerfile in Mark
 - **Ffuf** (Fast web fuzzer)
 - **Assetfinder** (Subdomain and asset discovery tool by Tom Nomnom)
 - **Waybackurls** (Extract URLs from the Wayback Machine by Tom Nomnom)
+ 
+
+
+
+- **Wpscan** (WordPress security scanner)
+- **Nmap** (Network mapper)
+- **Nikto** (Web server scanner)
+
+
 
 ## Containerization Tools
 
