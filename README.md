@@ -32,7 +32,6 @@ Here is the formatted list of tools installed by the provided Dockerfile in Mark
 
 ## Essential Tools and Libraries
 
-
 - **Bash**
 - **Curl**
 - **Wget**
@@ -58,17 +57,18 @@ Here is the formatted list of tools installed by the provided Dockerfile in Mark
 - **Libffi-dev**
 - **Iputils-ping**
 - **Dirb**
-- **Lsd** (modern `ls` command)
+- **lsd** (modern `ls` command)
 - **Nano** (text editor)
 
 ## Security Tools
-### found in /usr/bin
+### Found in /usr/bin
 - **Ping**
-- 
-## found in /usr/local/bin/
+- **Tree**
+
+### Found in /usr/local/bin/
 - - **Wpscan** (WordPress security scanner)
 
-### found in /root/go/bin
+### Found in /root/go/bin
 - **Subfinder** (Subdomain discovery tool by ProjectDiscovery)
 - **Httpx** (Fast and multi-purpose HTTP tool by ProjectDiscovery)
 - **Hakrawler** (Web crawler by Hakluke)
