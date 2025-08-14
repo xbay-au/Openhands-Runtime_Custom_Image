@@ -108,9 +108,7 @@ RUN go install github.com/hakluke/hakrawler@latest && \
 # Install Nikto security scanner
 RUN wget https://github.com/sullo/nikto/archive/master.zip \
     unzip master.zip \
-    unzip master.zip \
     perl nikto.pl
-    rm -rf /var/lib/apt/lists*
 
 ENV PATH=${PATH}:/opt/nikto
 
