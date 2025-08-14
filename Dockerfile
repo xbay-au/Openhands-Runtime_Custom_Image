@@ -41,6 +41,8 @@ RUN apt-get update && \
     iputils-ping \
     dirb \
     liblzma-dev && \
+    dnsutils \
+    whois \
     rm -rf /var/lib/apt/lists/
 
 # Install programming languages and related tools
@@ -104,8 +106,10 @@ RUN go install github.com/hakluke/hakrawler@latest && \
     go install github.com/hakluke/hakip2host@latest
 
 # Install Nikto security scanner
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends perl libnet-ssleay-perl && \
+RUN wget https://github.com/sullo/nikto/archive/master.zip \
+    unzip master.zip \
+    unzip master.zip \
+    perl nikto.pl
     rm -rf /var/lib/apt/lists*
 
 ENV PATH=${PATH}:/opt/nikto
