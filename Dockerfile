@@ -40,7 +40,7 @@ RUN apt-get update && \
     libffi-dev \
     iputils-ping \
     dirb \
-    liblzma-dev && \
+    liblzma-dev \
     dnsutils \
     whois \
     rm -rf /var/lib/apt/lists/
