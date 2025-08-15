@@ -44,6 +44,7 @@ RUN set -x && \
             dirb \
             liblzma-dev \
             dnsutils \
+            nikto \
             whois && \
         rm -rf /var/lib/apt/lists/* && \
         break || echo "Installation failed. Retrying..." && retry_count=$((retry_count - 1)) && sleep 5; \
@@ -124,12 +125,6 @@ RUN go install github.com/hakluke/hakrawler@latest && \
     go install -v github.com/hakluke/haktrails@latest && \
     go install github.com/hakluke/haktldextract@latest && \
     go install github.com/hakluke/hakip2host@latest
-
-# Install Nikto security scanner
-RUN wget https://github.com/sullo/nikto/archive/master.zip -O /tmp/master.zip && \
-    unzip /tmp/master.zip -d /opt/ && \
-    find /opt/nikto-master -name nikto.pl | xargs -I {} cp {} /usr/local/bin/nikto.pl && \
-    chmod +x /usr/local/bin/nikto.pl
 
 ENV PATH="${PATH}:/usr/local/bin"
 
