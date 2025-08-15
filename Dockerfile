@@ -39,12 +39,22 @@ RUN set -x && \
             xz-utils \
             apt-utils \
             tk-dev \
-            libffi-dev \
+            libffi-dev && \
+        rm -rf /var/lib/apt/lists/* && \
+        break || echo "Installation failed. Retrying..." && retry_count=$((retry_count - 1)) && sleep 5; \
+    done && \
+    [ $retry_count -gt 0 ] || exit 1
+
+# Install additional tools in a separate step
+RUN set -x && \
+    retry_count=3 && \
+    while [ $retry_count -gt 0 ]; do \
+        apt-get update && \
+        apt-get install -y --no-install-recommends \
             iputils-ping \
             dirb \
             liblzma-dev \
             dnsutils \
-            nikto \
             whois && \
         rm -rf /var/lib/apt/lists/* && \
         break || echo "Installation failed. Retrying..." && retry_count=$((retry_count - 1)) && sleep 5; \
@@ -126,10 +136,11 @@ RUN go install github.com/hakluke/hakrawler@latest && \
     go install github.com/hakluke/haktldextract@latest && \
     go install github.com/hakluke/hakip2host@latest
 
-ENV PATH="${PATH}:/usr/local/bin"
+# Install Tomnomnom Repo's
+RUN go install github.com/tomnomnom/assetfinder@latest && \
+    go install github.com/tomnomnom/waybackurls@latest
 
-# Verify Nikto installation
-RUN nikto -h || true  # Use `|| true` to prevent build failure if command is not found during verification.
+ENV PATH="${PATH}:/usr/local/bin"
 
 # Install Docker binaries
 RUN set -x && \
@@ -154,9 +165,3 @@ RUN set -x && \
 
 # Install ffuf
 RUN go install github.com/ffuf/ffuf/v2@latest
-
-# Install assetfinder
-RUN go install github.com/tomnomnom/assetfinder@latest
-
-# Install waybackurls
-RUN go install github.com/tomnomnom/waybackurls@latest
